@@ -1,4 +1,4 @@
-name: Web Document Scanner Package Release
+name: Scanify Web Document Scanner Package Release
 
 on:
   push:

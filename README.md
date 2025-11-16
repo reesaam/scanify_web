@@ -1,21 +1,21 @@
 
 <p align="center">
-  Web Document Scanner
+  Scanify Web Document Scanner
 </p>
 <p align="center">
   <!-- Pub Version -->
-  <a href="https://pub.dev/packages/web_document_scanner"><img src="https://img.shields.io/pub/v/web_document_scanner?logo=dart" alt="PubVersion"></a>
+  <a href="https://pub.dev/packages/scanify_web"><img src="https://img.shields.io/pub/v/scanify_web?logo=dart" alt="PubVersion"></a>
   <!-- Pub Points} -->
-  <a href="https://pub.dev/packages/web_document_scanner"><img src="https://img.shields.io/pub/points/web_document_scanner?logo=dart" alt="PubPoints"></a>
+  <a href="https://pub.dev/packages/scanify_web"><img src="https://img.shields.io/pub/points/scanify_web?logo=dart" alt="PubPoints"></a>
   <!-- GitHub Repo -->
-  <a href="https://github.com/reesaam/web_document_scanner"><img src="https://img.shields.io/badge/repo-Web_Document_Scanner-yellowgreen?logo=github" alt="build"></a>
+  <a href="https://github.com/reesaam/scanify_web"><img src="https://img.shields.io/badge/repo-Scanify_Web_Document_Scanner-yellowgreen?logo=github" alt="build"></a>
   <!-- GitHub Stars -->
-  <a href="https://github.com/reesaam/web_document_scanner"><img src="https://img.shields.io/github/stars/felangel/bloc.svg?style=flat&logo=github&colorB=deeppink&label=stars" alt="Star on Github"></a>
+  <a href="https://github.com/reesaam/scanify_web"><img src="https://img.shields.io/github/stars/felangel/bloc.svg?style=flat&logo=github&colorB=deeppink&label=stars" alt="Star on Github"></a>
   <!-- DartDoc -->
-  <a href="https://pub.dev/documentation/web_document_scanner/latest"><img src="https://img.shields.io/badge/dartdocs-latest-blue.svg" alt="Latest Dartdocs"></a>
+  <a href="https://pub.dev/documentation/scanify_web/latest"><img src="https://img.shields.io/badge/dartdocs-latest-blue.svg" alt="Latest Dartdocs"></a>
 </p>
 <p align="center">
-  <a href="https://github.com/reesaam/web_document_scanner"><img src="https://img.shields.io/badge/Web-black" alt="ios"></a>
+  <a href="https://github.com/reesaam/scanify_web"><img src="https://img.shields.io/badge/Web-black" alt="ios"></a>
 
 </p>
 
@@ -35,7 +35,7 @@ A Flutter Package to Scan Document on WEB.
 Add dependencies in the `pubspec.yaml`:
 ```yaml
 dependencies:
-  web_document_scanner: ^latest
+  scanify_web: ^latest
 ```
 
 Get the Changes by:
@@ -50,19 +50,19 @@ dart pub get
 ## Usage
 
 ```dart
-import 'package:web_document_scanner/web_document_scanner.dart';
+import 'package:scanify_web/scanify_web.dart';
 ```
 
-`Controller` must be initialized:
+`ScanifyController` must be initialized:
 ```dart
   void _controllerInitialization() async {
-  scannerStatus = ScannerStatus.initializing;
+  scanifyStatus = ScanifyStatus.initializing;
   final List<CameraDescription> cameras = await availableCameras();
   if (cameras.isNotEmpty) {
     final CameraDescription selectedCamera = cameras.first;
-    scannerController = ScannerController(description: selectedCamera);
-    if (scannerController != null) {
-      await scannerController?.initialize();
+    scanifyController = ScanifyController(description: selectedCamera);
+    if (scanifyController != null) {
+      await scanifyController?.initialize();
     } else {
       throw Exception(PackageStrings.throwErrorControllerInitialization);
     }
@@ -72,7 +72,7 @@ import 'package:web_document_scanner/web_document_scanner.dart';
 }
 ```
 
-`Controller` Can be Initialized in page initialization OR triggered by a trigger such as tapping on a Button:
+`ScanifyController` Can be Initialized in page initialization OR triggered by a trigger such as tapping on a Button:
 ```dart
   void onInit() {
   _controllerInitialization();
@@ -81,31 +81,31 @@ import 'package:web_document_scanner/web_document_scanner.dart';
 ```
 OR
 ```dart
-Button(onPressed: () => _controllerInitialization(), child: Text('Controller Initialization'));
+Button(onPressed: () => _controllerInitialization(), child: Text('ScanifyController Initialization'));
 ```
 
 > **_NOTE:_**
-> In either way, `Controller` must be initialized before having `Scanner` Widget.
+> In either way, `ScanifyController` must be initialized before having `Scanner` Widget.
 
 Using Scanner Widget in your Screen:
 ```dart
-WebDocumentScanner(scannerController!);
+ScanifyWebScanner(scanifyController!);
 ```
 
 Controller will return the Captured Document:
 ```dart
-ScannerResponse scannerResponse = await scannerController!.startAutoScan();
+ScanifyResponse scanifyResponse = await scanifyController!.startAutoScan();
 ```
 
-The `Status` of the `Scanner` can be controlled by setting the `ScannerStatus` of the `Controller`:
+The `Status` of the `Scanify` can be controlled by setting the `ScanifyStatus` of the `ScanifyController`:
 ```dart
-ScannerStatus scannerStatus = ScannerStatus.scanning;
+ScanifyStatus scanifyStatus = ScanifyStatus.scanning;
 ```
 
 ### You can check the `/example` for a more complete example, more details and further information.
 
 ## Docs
-<a href="https://github.com/reesaam/web_document_scanner/tree/main/generator/doc/api"><img src="https://img.shields.io/badge/GitHub-Docs_Repository-important?logo=github" alt="build"></a>
+<a href="https://github.com/reesaam/scanify_web/tree/main/generator/doc/api"><img src="https://img.shields.io/badge/GitHub-Docs_Repository-important?logo=github" alt="build"></a>
 
 ## About Author
 
@@ -120,10 +120,9 @@ ScannerStatus scannerStatus = ScannerStatus.scanning;
 <a href="https://dart.dev"><img src="https://img.shields.io/badge/Dart-red?logo=dart" alt="Pub"></a>
 <a href="https://flutter.dev"><img src="https://img.shields.io/badge/Flutter-blue?logo=flutter" alt="Pub"></a>
 <a href="https://pub.dev/packages/get"><img src="https://img.shields.io/badge/pub-GetX-blue?logo=dart" alt="Pub"></a>
-<a href="https://pub.dev/packages/build_runner"><img src="https://img.shields.io/badge/pub-BuildRunner-red?logo=dart" alt="Pub"></a>
 <a href="https://pub.dev/packages/dartdoc"><img src="https://img.shields.io/badge/pub-DartDoc-red?logo=dart" alt="Pub"></a>
 
 ## License
 This project is licensed under the '**BSD-3-Clause**' License - see the LICENSE for details.
 
-<a href="https://pub.dev/packages/web_document_scanner/license"><img src="https://img.shields.io/badge/LICENSE-blue" alt="Pub"></a>
+<a href="https://pub.dev/packages/scanify_web/license"><img src="https://img.shields.io/badge/LICENSE-blue" alt="Pub"></a>

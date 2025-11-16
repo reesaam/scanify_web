@@ -1,8 +1,8 @@
-name: example_for_web_document_scanner
-description: Web Document Scanner
-version: 0.0.2
+name: example_for_scanify_web
+description: "Scanify Web Document Scanner Example"
+version: 0.0.1
 homepage: https://www.linkedin.com/in/resam/
-repository: https://github.com/reesaam/web_document_scanner
+repository: https://github.com/reesaam/scanify_web
 funding:
   - https://resam.site
 
@@ -13,8 +13,8 @@ dependencies:
   flutter:
     sdk: flutter
 
-#  web_document_scanner: 0.0.2
-  web_document_scanner:
+#  scanify_web: 0.0.1
+  scanify_web:
     path: ../
 
 dev_dependencies:

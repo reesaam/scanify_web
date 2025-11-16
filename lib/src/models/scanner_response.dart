@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 
-import '../../web_document_scanner.dart';
+import '../../scanify_web.dart';
 
 class ScannerResponse {
   const ScannerResponse({

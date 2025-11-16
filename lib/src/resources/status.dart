@@ -1,4 +1,4 @@
-enum ScannerStatus {
+enum ScanifyStatus {
   initializing,
   cameraInitializing,
   initialized,
@@ -10,5 +10,5 @@ enum ScannerStatus {
   error(dispose: true);
 
   final bool? dispose;
-  const ScannerStatus({this.dispose});
+  const ScanifyStatus({this.dispose});
 }

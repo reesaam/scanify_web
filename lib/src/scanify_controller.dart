@@ -16,12 +16,12 @@ export 'resources/resources.dart';
 export 'utils/document_border_painter.dart';
 export 'extensions/extensions.dart';
 
-class ScannerController extends CameraController {
+class ScanifyController extends CameraController {
   final DetectionArguments? detectionArguments;
-  ValueNotifier<ScannerStatus> status = ValueNotifier(ScannerStatus.closed);
+  ValueNotifier<ScanifyStatus> status = ValueNotifier(ScanifyStatus.closed);
   ValueNotifier<Rect> rect = ValueNotifier(Rect.zero);
 
-  ScannerController({
+  ScanifyController({
     required this.description,
     this.resolutionPreset = ResolutionPreset.low,
     this.detectionArguments,
@@ -35,13 +35,13 @@ class ScannerController extends CameraController {
 
   @override
   Future<void> initialize() async {
-    status.value = ScannerStatus.cameraInitializing;
+    status.value = ScanifyStatus.cameraInitializing;
     return super.initialize();
   }
 
   Future<ScannerResponse> startAutoScan() async {
     releaseLog('AutoScan Started ...');
-    status.value = ScannerStatus.scanning;
+    status.value = ScanifyStatus.scanning;
     DetectionModel? detectionResponse;
     DetectionArguments arguments = detectionArguments ?? DetectionArguments();
     await Future.doWhile(
@@ -79,12 +79,12 @@ class ScannerController extends CameraController {
               croppedData: croppedData,
               analyzeData: analyzeData,
             );
-            status.value = ScannerStatus.scanned;
+            status.value = ScanifyStatus.scanned;
           }
         }
 
         releaseLog('status: ${status.value}');
-        return status.value == ScannerStatus.scanning;
+        return status.value == ScanifyStatus.scanning;
       },
     );
     final ScannerResponse scannerResponse = ScannerResponse(
@@ -99,6 +99,6 @@ class ScannerController extends CameraController {
   }
 
   void stopAutoScan() {
-    status.value = ScannerStatus.closed;
+    status.value = ScanifyStatus.closed;
   }
 }

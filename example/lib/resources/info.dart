@@ -1,8 +1,8 @@
-class PackageAuthorInfo {
-  static String get packageName => 'web_document_scanner';
-  static String get packageNameDescription => 'Web Document Scanner';
-  static String get packageAddress => 'https://pub.dev/packages/web_document_scanner';
-  static String get packageGitHubRepositoryAddress => 'https://github.com/reesaam/web_document_scanner';
+class PackageInfo {
+  static String get packageName => 'scanify_web';
+  static String get packageNameDescription => 'Scanify Web Document Scanner';
+  static String get packageAddress => 'https://pub.dev/packages/scanify_web';
+  static String get packageGitHubRepositoryAddress => 'https://github.com/reesaam/scanify_web';
   static String get authorName => 'Resam Taghipour';
   static String get emailAddress => 'resam.t@gmail.com';
   static String get websiteAddress => 'https://www.resam.site';

@@ -1,33 +1,33 @@
-import '../scanner_controller.dart';
+import '../scanify_controller.dart';
 import 'logger.dart';
 
 /// This is the Border of the Document in Camera Screen
 /// You may observe the real time document detection in the camera screen
 
-class DocumentBorderPainterWidget extends StatefulWidget {
+class ScanifyDocumentBorderPainterWidget extends StatefulWidget {
   final Rect rect;
-  final ScannerStatus scannerStatus;
+  final ScanifyStatus scanifyStatus;
   final Color color;
   final double strokeWidth;
   final PaintingStyle paintingStyle;
-  const DocumentBorderPainterWidget({
+  const ScanifyDocumentBorderPainterWidget({
     super.key,
     required this.rect,
-    required this.scannerStatus,
+    required this.scanifyStatus,
     required this.color,
     required this.strokeWidth,
     required this.paintingStyle,
   });
 
   @override
-  State<DocumentBorderPainterWidget> createState() => _DocumentBorderPainterWidgetState();
+  State<ScanifyDocumentBorderPainterWidget> createState() => _ScanifyDocumentBorderPainterWidgetState();
 }
 
-class _DocumentBorderPainterWidgetState extends State<DocumentBorderPainterWidget> {
+class _ScanifyDocumentBorderPainterWidgetState extends State<ScanifyDocumentBorderPainterWidget> {
   @override
-  Widget build(BuildContext context) => _isDrawing(rect: widget.rect, scannerStatus: widget.scannerStatus)
+  Widget build(BuildContext context) => _isDrawing(rect: widget.rect, scanifyStatus: widget.scanifyStatus)
       ? CustomPaint(
-          painter: DocumentBorderPainter(
+          painter: ScanifyDocumentBorderPainter(
             widget.rect,
             widget.color,
             widget.strokeWidth,
@@ -38,12 +38,12 @@ class _DocumentBorderPainterWidgetState extends State<DocumentBorderPainterWidge
       : _notAvailable;
 }
 
-class DocumentBorderPainter extends CustomPainter {
+class ScanifyDocumentBorderPainter extends CustomPainter {
   final Rect rect;
   final Color color;
   final double strokeWidth;
   final PaintingStyle paintingStyle;
-  const DocumentBorderPainter(
+  const ScanifyDocumentBorderPainter(
     this.rect,
     this.color,
     this.strokeWidth,
@@ -70,9 +70,9 @@ class DocumentBorderPainter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }
 
-bool _isDrawing({required Rect rect, required ScannerStatus scannerStatus}) {
-  final result = PackageDefaults.drawDocumentBorder && scannerStatus == ScannerStatus.scanning && rect != Rect.zero;
-  releaseLog('DocumentBorderPainter IsDrawing: $result');
+bool _isDrawing({required Rect rect, required ScanifyStatus scanifyStatus}) {
+  final result = PackageDefaults.drawDocumentBorder && scanifyStatus == ScanifyStatus.scanning && rect != Rect.zero;
+  releaseLog('ScanifyDocumentBorderPainter IsDrawing: $result');
   return result;
 }
 

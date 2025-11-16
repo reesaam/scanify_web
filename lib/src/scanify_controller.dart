@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
@@ -5,10 +7,11 @@ import 'document_scanner.dart';
 import 'extensions/extensions.dart';
 import 'models/detection_arguments.dart';
 import 'models/detection_model.dart';
-import 'models/scanner_response.dart';
+import 'models/scanify_response.dart';
 import 'resources/resources.dart';
 import 'utils/logger.dart';
 
+//Exports
 export 'package:flutter/material.dart';
 export 'package:camera/camera.dart';
 export 'package:flutter/foundation.dart';
@@ -16,12 +19,12 @@ export 'resources/resources.dart';
 export 'utils/document_border_painter.dart';
 export 'extensions/extensions.dart';
 
-class ScannerController extends CameraController {
+class ScanifyController extends CameraController {
   final DetectionArguments? detectionArguments;
-  ValueNotifier<ScannerStatus> status = ValueNotifier(ScannerStatus.closed);
+  ValueNotifier<ScanifyStatus> status = ValueNotifier(ScanifyStatus.closed);
   ValueNotifier<Rect> rect = ValueNotifier(Rect.zero);
 
-  ScannerController({
+  ScanifyController({
     required this.description,
     this.resolutionPreset = ResolutionPreset.low,
     this.detectionArguments,
@@ -35,13 +38,13 @@ class ScannerController extends CameraController {
 
   @override
   Future<void> initialize() async {
-    status.value = ScannerStatus.cameraInitializing;
+    status.value = ScanifyStatus.cameraInitializing;
     return super.initialize();
   }
 
-  Future<ScannerResponse> startAutoScan() async {
+  Future<ScanifyResponse> startAutoScan() async {
     releaseLog('AutoScan Started ...');
-    status.value = ScannerStatus.scanning;
+    status.value = ScanifyStatus.scanning;
     DetectionModel? detectionResponse;
     DetectionArguments arguments = detectionArguments ?? DetectionArguments();
     await Future.doWhile(
@@ -64,9 +67,7 @@ class ScannerController extends CameraController {
 
             final imageData = await capturedImage.readAsBytes();
             final imageFile = XFile.fromData(imageData);
-            final croppedData = await imageFile.cropToUintListImage(detectionResponse!.rect);
-
-            final analyzeData = await XFile.fromData(detectionResponse!.analyzeData!).readAsBytes();
+            Uint8List? croppedData = await imageFile.cropToUintListImage(detectionResponse!.rect);
 
             debugLog('response name: ${detectionResponse?.name}');
             debugLog('response path: ${detectionResponse?.path}');
@@ -77,17 +78,16 @@ class ScannerController extends CameraController {
               originalImageFile: imageFile,
               originalImageData: imageData,
               croppedData: croppedData,
-              analyzeData: analyzeData,
             );
-            status.value = ScannerStatus.scanned;
+            status.value = ScanifyStatus.scanned;
           }
         }
 
         releaseLog('status: ${status.value}');
-        return status.value == ScannerStatus.scanning;
+        return status.value == ScanifyStatus.scanning;
       },
     );
-    final ScannerResponse scannerResponse = ScannerResponse(
+    final ScanifyResponse scannerResponse = ScanifyResponse(
       path: detectionResponse?.path,
       imageFile: detectionResponse?.originalImageFile,
       imageData: detectionResponse?.originalImageData,
@@ -99,6 +99,6 @@ class ScannerController extends CameraController {
   }
 
   void stopAutoScan() {
-    status.value = ScannerStatus.closed;
+    status.value = ScanifyStatus.closed;
   }
 }

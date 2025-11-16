@@ -1,6 +1,6 @@
 class PackageStrings {
   /// Info
-  static const String packageName = 'Web Document Scanner';
+  static const String packageName = 'Scanify Web Document Scanner';
 
   /// Logger
   static const String debugLog = 'DEBUG';
@@ -12,6 +12,6 @@ class PackageStrings {
 
   /// Errors
   static const String throwError = 'Something Went Wrong';
-  static const String throwErrorControllerInitialization = 'Scanner Controller not Initialized';
+  static const String throwErrorControllerInitialization = 'ScanifyController not Initialized';
   static const String throwErrorCameraAvailability = 'Camera is not Available';
 }

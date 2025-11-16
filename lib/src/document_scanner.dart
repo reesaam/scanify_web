@@ -35,8 +35,7 @@ DetectionModel analyze({
       name: file?.name,
       originalImageFile: file,
       originalImageData: image.toUint8List(),
-      croppedData: cropped.toUint8List(),
-      analyzeData: sobel.toUint8List(),
+      croppedData: PackageDefaults.autoCrop ? cropped.toUint8List() : null,
     );
   }
   return _document;

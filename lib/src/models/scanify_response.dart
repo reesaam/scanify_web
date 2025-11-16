@@ -1,6 +1,3 @@
-import 'dart:typed_data';
-import 'package:flutter/material.dart';
-
 import '../../scanify_web.dart';
 
 class ScanifyResponse {

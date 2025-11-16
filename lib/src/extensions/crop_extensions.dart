@@ -1,9 +1,5 @@
-import 'dart:typed_data';
-import 'package:flutter/material.dart';
 import 'package:image/image.dart' as img;
 import '../../scanify_web.dart';
-import '../resources/resources.dart';
-import '../resources/package_defaults.dart';
 
 /// [extensions] related to [Crop] functionalities
 

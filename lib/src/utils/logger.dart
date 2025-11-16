@@ -1,5 +1,6 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
-import '../resources/package_defaults.dart';
 import '../resources/resources.dart';
 
 debugLog(String log, {bool disabled = false}) =>

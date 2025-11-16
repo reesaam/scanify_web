@@ -2,7 +2,6 @@ import 'dart:typed_data';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:image/image.dart' as img;
 
 import 'document_scanner.dart';
 import 'extensions/extensions.dart';
@@ -12,6 +11,7 @@ import 'models/scanify_response.dart';
 import 'resources/resources.dart';
 import 'utils/logger.dart';
 
+//Exports
 export 'package:flutter/material.dart';
 export 'package:camera/camera.dart';
 export 'package:flutter/foundation.dart';

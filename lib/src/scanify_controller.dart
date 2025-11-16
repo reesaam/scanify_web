@@ -1,11 +1,14 @@
+import 'dart:typed_data';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:image/image.dart' as img;
 
 import 'document_scanner.dart';
 import 'extensions/extensions.dart';
 import 'models/detection_arguments.dart';
 import 'models/detection_model.dart';
-import 'models/scanner_response.dart';
+import 'models/scanify_response.dart';
 import 'resources/resources.dart';
 import 'utils/logger.dart';
 
@@ -39,7 +42,7 @@ class ScanifyController extends CameraController {
     return super.initialize();
   }
 
-  Future<ScannerResponse> startAutoScan() async {
+  Future<ScanifyResponse> startAutoScan() async {
     releaseLog('AutoScan Started ...');
     status.value = ScanifyStatus.scanning;
     DetectionModel? detectionResponse;
@@ -64,9 +67,7 @@ class ScanifyController extends CameraController {
 
             final imageData = await capturedImage.readAsBytes();
             final imageFile = XFile.fromData(imageData);
-            final croppedData = await imageFile.cropToUintListImage(detectionResponse!.rect);
-
-            final analyzeData = await XFile.fromData(detectionResponse!.analyzeData!).readAsBytes();
+            Uint8List? croppedData = await imageFile.cropToUintListImage(detectionResponse!.rect);
 
             debugLog('response name: ${detectionResponse?.name}');
             debugLog('response path: ${detectionResponse?.path}');
@@ -77,7 +78,6 @@ class ScanifyController extends CameraController {
               originalImageFile: imageFile,
               originalImageData: imageData,
               croppedData: croppedData,
-              analyzeData: analyzeData,
             );
             status.value = ScanifyStatus.scanned;
           }
@@ -87,7 +87,7 @@ class ScanifyController extends CameraController {
         return status.value == ScanifyStatus.scanning;
       },
     );
-    final ScannerResponse scannerResponse = ScannerResponse(
+    final ScanifyResponse scannerResponse = ScanifyResponse(
       path: detectionResponse?.path,
       imageFile: detectionResponse?.originalImageFile,
       imageData: detectionResponse?.originalImageData,

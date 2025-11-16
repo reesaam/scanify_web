@@ -26,7 +26,7 @@ class _ScanifyPageState extends State<ScanifyPage> {
   /// [Variables] to control and modify settings and functionalities
   ScanifyController? scanifyController;
   ScanifyStatus scanifyStatus = ScanifyStatus.closed;
-  ScannerResponse scanifyResponse = ScannerResponse();
+  ScanifyResponse scanifyResponse = ScanifyResponse();
 
   @override
   void initState() {

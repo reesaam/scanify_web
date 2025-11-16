@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 import '../../scanify_web.dart';
 
-class ScannerResponse {
-  const ScannerResponse({
+class ScanifyResponse {
+  const ScanifyResponse({
     this.path,
     this.imageFile,
     this.imageData,

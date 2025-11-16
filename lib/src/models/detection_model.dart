@@ -34,7 +34,6 @@ class DetectionModel {
     XFile? originalImageFile,
     Uint8List? originalImageData,
     Uint8List? croppedData,
-    Uint8List? analyzeData,
     List<Offset>? corners,
     Rect? rect,
     DetectionDocumentDetail? documentDetails,

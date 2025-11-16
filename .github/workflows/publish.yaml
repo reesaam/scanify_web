@@ -16,7 +16,7 @@ jobs:
       pull-requests: write
 
     runs-on: ubuntu-latest
-    environment: ${{ PUB_DEV }}
+    environment: PUB_DEV
 
     steps:
       - name: Checkout code
@@ -25,12 +25,12 @@ jobs:
       - name: Set up Dart
         uses: dart-lang/setup-dart@v1
         with:
-          sdk: ${{ PUB_DEV.DART_VERSION }}
+          sdk: ${{ secrets.DART_VERSION }}
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: ${{ PUB_DEV.FLUTTER_VERSION }}
+          flutter-version: ${{ secrets.FLUTTER_VERSION }}
 
       - name: Clean Build
         run: flutter clean
